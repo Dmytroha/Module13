@@ -1,0 +1,22 @@
+{
+  "name": " Benedict Cumberbatch",
+  "username": "CumberdictBenebatch",
+  "email": "Cucumber@yaahoo.com",
+  "address": {
+    "street": "Malostranska",
+    "suite": "Suite 456",
+    "city": "Prague",
+    "zipcode": "110 00",
+    "geo": {
+      "lat": "-67.6102",
+      "lng": "-46.0653"
+    }
+  },
+  "phone": "420-775-695-156",
+  "website": "Cumberbatch.cz",
+  "company": {
+    "name": "HlavaARamena",
+    "catchPhrase": "Face to face with nature",
+    "bs": "refine everything"
+  }
+}
