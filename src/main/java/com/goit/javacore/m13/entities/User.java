@@ -15,6 +15,7 @@ public class User {
     private String website;
     private Company company;
 
+
     public User(int id, String name, String username, String email,
                 Address address, String phone, String website, Company company) {
         this.id = id;
