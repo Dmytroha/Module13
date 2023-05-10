@@ -87,6 +87,49 @@ public class JsonPlaceholderAPITest {
             throw new RuntimeException("Failed to get users: " + response.body());
         }
     }
+    // get user by id
+    public User getUserById(int userId) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_BASE_URL + "/users/" + userId))
+                .build();
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() == 200) {
+            User user = gson.fromJson(response.body(), User.class);
+            return user;
+        } else if (response.statusCode() == 404) {
+            return null; // User not found
+        } else {
+            throw new RuntimeException("Failed to get user: " + response.body());
+        }
+    }
+
+    public User getUserByUserName(String username) throws IOException, InterruptedException {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(API_BASE_URL + "/users?username="+username))
+                .build();
+        //System.out.println(request.uri());
+
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+        if (response.statusCode() >= 200 && response.statusCode() < 300) {
+
+            User[] userByUserName = gson.fromJson(response.body(), User[].class);
+            if (userByUserName.length > 0) {
+                return userByUserName[0];
+            } else {
+                return null;
+            }
+
+        } else {
+            throw new RuntimeException("Failed to get users: " + response.body());
+        }
+    }
+
+
+
+
 
     /**
      * fill User form file newUser.json
@@ -94,22 +137,20 @@ public class JsonPlaceholderAPITest {
      * @throws IOException
      */
     public User getUserFromFile() throws IOException {
-        StringBuffer json = new StringBuffer();
+
+        StringBuffer jsonStringBuffer = new StringBuffer();
         String str;
         try (BufferedReader br = new BufferedReader(
                 new FileReader("src\\main\\resources\\newUser.json"))){
             while((str=br.readLine())!=null){
-              json.append(str);
+              jsonStringBuffer.append(str);
               }
-            return new Gson().fromJson(json.toString(), User.class);
+            return new Gson().fromJson(jsonStringBuffer.toString(), User.class);
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
-
-
         return null;
     }
-
 
 
 }
