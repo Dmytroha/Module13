@@ -1,12 +1,12 @@
 package com.goit.javacore.m13.entities;
 
-public class UserTask {
+public class Task {
     private int userId;
     private int id;
     private String title;
     private boolean completed;
 
-    public UserTask(int userId, int id, String title, boolean completed) {
+    public Task(int userId, int id, String title, boolean completed) {
         this.userId = userId;
         this.id = id;
         this.title = title;
